@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo dnf update --refresh --assumeyes
+#sudo dnf update --refresh --assumeyes
 
-sudo dnf builddep mesa --assumeyes
+#sudo dnf builddep mesa --assumeyes
 
-sudo dnf install cmake libva-utils libva rpm-build --assumeyes
+#sudo dnf install cmake libva-utils libva rpm-build --assumeyes
 
 cd ~
 sudo dnf download --source mesa-libGL --assumeyes
