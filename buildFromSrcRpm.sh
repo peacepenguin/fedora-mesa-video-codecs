@@ -9,6 +9,8 @@ dnf builddep mesa --assumeyes
 cd ~
 dnf download --source mesa-libGL --assumeyes
 
+srcrpmname=$(dnf info mesa-libGL |grep -m 1 Source | awk -F' : ' '{print $2}')
+
 rpm -i $srcrpmname
 
 
