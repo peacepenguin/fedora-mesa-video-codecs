@@ -2,4 +2,4 @@ container:
   image: fedora:37
 
 task:
-  script: buildFromSrcRpm.sh
+  script: bash buildFromSrcRpm.sh
