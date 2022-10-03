@@ -1,5 +1,5 @@
 container:
-  image: fedora:37
+  image: fedora:latest
 
 task:
   script: bash buildFromSrcRpm.sh
