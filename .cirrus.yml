@@ -2,4 +2,4 @@ container:
   image: fedora:37
 
 task:
-  script: echo 'hello from cirrus build system server running fedora!'
+  script: buildFromSrcRpm.sh
