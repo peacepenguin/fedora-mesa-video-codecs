@@ -1,5 +1,7 @@
 container:
   image: fedora:37
+  cpu: 4
+  memory: 8G
 
 task:
   script: bash buildFromSrcRpm.sh
