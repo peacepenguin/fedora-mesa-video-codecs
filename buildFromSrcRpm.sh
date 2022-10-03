@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo dnf update --refresh --assumeyes
+dnf update --refresh --assumeyes
 
-sudo dnf builddep mesa --assumeyes
+dnf install dnf-plugins-core cmake libva-utils libva rpm-build --assumeyes
 
-sudo dnf install dnf-plugins-core cmake libva-utils libva rpm-build --assumeyes
+dnf builddep mesa --assumeyes
 
 cd ~
 dnf download --source mesa-libGL --assumeyes
@@ -28,3 +28,4 @@ cd ~/rpmbuild/
 rpmbuild -bb ~/rpmbuild/SPECS/mesa.spec
 
 
+ls ~/rpmbuild/RPMS/x86_64
