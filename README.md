@@ -35,16 +35,23 @@ sudo dnf install libva-utils
 # run vainfo, check for codec support
 vainfo
 ```
-Enable Firefox to use VAAPI decode:
+Check Firefox is able to use va-api:
 ```
-# In firefox, goto about:config
+# Everything works by default on Fedora 36+ with Wayland and Gnome. Should work in kde/plasma too.
 
-# Set:
+# to confirm va-api is working, launch firefox from this command line:
+# set an env variable to log decoder activity in firefox:
+MOZ_LOG="PlatformDecoderModule:5"
 
-media.ffmpeg.vaapi.enabled                    true
-media.ffvpx.enabled                           false  (Disables built in VP8/VP9 software decode)
-media.rdd-vpx.enabled                         false  (Disable RDD for ffvpx)
-media.navigator.mediadatadecoder_vpx_enabled  true   (enable vaapi for webrtc)
-media.rdd-ffmpeg.enabled                      false  (Disable RDD for ffmpeg)
+# then launch firefox from the same command line session:
+firefox
+
+# go play a video in firefox, you should see log out put in the terminal like below which indicates successful use of VA-API by firefox:
+
+libva info: VA-API version 1.15.0
+libva info: Trying to open /usr/lib64/dri/radeonsi_drv_video.so
+libva info: Found init function __vaDriverInit_1_15
+libva info: va_openDriver() returns 0
+
 ```
 
