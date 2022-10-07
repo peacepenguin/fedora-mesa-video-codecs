@@ -26,3 +26,25 @@ sudo dnf copr disable carl3830/mesa-fedora-with-codecs
 sudo dnf distrosync
 
 ```
+
+Confirm vaapi is working with 'vainfo'.
+```
+# install package that provides 'vainfo'
+sudo dnf install libva-utils
+
+# run vainfo, check for codec support
+vainfo
+```
+Enable Firefox to use VAAPI decode:
+```
+# In firefox, goto about:config
+
+# Set:
+
+media.ffmpeg.vaapi.enabled                    true
+media.ffvpx.enabled                           false  (Disables built in VP8/VP9 software decode)
+media.rdd-vpx.enabled                         false  (Disable RDD for ffvpx)
+media.navigator.mediadatadecoder_vpx_enabled  true   (enable vaapi for webrtc)
+media.rdd-ffmpeg.enabled                      false  (Disable RDD for ffmpeg)
+```
+
