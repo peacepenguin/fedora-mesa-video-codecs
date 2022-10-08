@@ -1,4 +1,4 @@
-This repo is used to store the source code of the build script used on Fedora COPR to auto-rebuild mesa fedora packages, modified to include codecs.
+This repo is used to store the source code of the build script used on Fedora COPR to auto-rebuild mesa fedora packages, modified to include additional codecs
 
 The builds occur here: https://copr.fedorainfracloud.org/coprs/carl3830/mesa-fedora-with-codecs/
 
@@ -35,7 +35,7 @@ sudo dnf install libva-utils
 # run vainfo, check the codec support:
 vainfo
 ```
-Enable and confirm Firefox is able to use va-api hardware video decode on fedora:
+Setup Firefox to be able to use va-api hardware video decode for all codecs va-api can now handle: (h264, etc)
 ```
 # Enable the rpm fusion 'free' repo to get access to needed codec lib files:
 # This is most likley already enabled on your system:
@@ -51,10 +51,8 @@ sudo dnf install ffmpeg-libs
 # to confirm va-api is working, launch firefox from this command line to see va-api and decode logging:
 MOZ_LOG="PlatformDecoderModule:5" firefox
 
-# go play a video in firefox, you should see log out put in the terminal for VA-API usage when the video start playing.
+# go play a video of each codec listed in vainfo in firefox, you should see log output in the terminal indicating VA-API usage. All codecs your hardware supports should now be able to be used by firefox in hardware decode mode.
 
-# optionally install the firefox extension 'h264ify' so you can force avc1 codec use on youtube to test hardware decode. 
-# Under youtube 'stats for nerds' you should see 'avc1' to indicate h264 usage.
 
 ```
 
