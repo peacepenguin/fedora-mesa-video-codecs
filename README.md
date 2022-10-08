@@ -32,26 +32,29 @@ Confirm vaapi is working with 'vainfo'.
 # install package that provides 'vainfo'
 sudo dnf install libva-utils
 
-# run vainfo, check for codec support
+# run vainfo, check the codec support:
 vainfo
 ```
-Check Firefox is able to use va-api:
+Enable and confirm Firefox is able to use va-api hardware video decode on fedora:
 ```
-# Everything works by default on Fedora 36+ with Wayland and Gnome. Should work in kde/plasma too.
+# Enable the rpm fusion 'free' repo to get access to needed codec lib files:
+# This is most likley already enabled on your system:
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
-# to confirm va-api is working, launch firefox from this command line:
-# set an env variable to log decoder activity in firefox:
-MOZ_LOG="PlatformDecoderModule:5"
+# Optionally install non-free as well:
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf update --refresh
 
-# then launch firefox from the same command line session:
-firefox
+# install needed codecs from rpm fusion free repo:
+sudo dnf install ffmpeg-libs
 
-# go play a video in firefox, you should see log out put in the terminal like below which indicates successful use of VA-API by firefox:
+# to confirm va-api is working, launch firefox from this command line to see va-api and decode logging:
+MOZ_LOG="PlatformDecoderModule:5" firefox
 
-libva info: VA-API version 1.15.0
-libva info: Trying to open /usr/lib64/dri/radeonsi_drv_video.so
-libva info: Found init function __vaDriverInit_1_15
-libva info: va_openDriver() returns 0
+# go play a video in firefox, you should see log out put in the terminal for VA-API usage when the video start playing.
+
+# optionally install the firefox extension 'h264ify' so you can force avc1 codec use on youtube to test hardware decode. 
+# Under youtube 'stats for nerds' you should see 'avc1' to indicate h264 usage.
 
 ```
 
